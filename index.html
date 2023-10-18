@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/normailze.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Projecto U</title>
+  </head>
+  <body>
+    <h1>Buscador de Registros</h1>
+    <div class="modal" id="modal">
+      <ul id="users" class="usuarios">
+        
+      </ul>
+    </div>
+    <div class="buscador contenedor">
+      <input
+        type="text"
+        class="buscador__input"
+        placeholder="Ingrese Nombre de Usuario"
+        id="input"
+      />
+      <button class="buscador__btn" id="btn">Buscar</button>
+      <button class="buscador__btn" id="btn-usuarios">Ver Usuarios</button>
+    </div>
+    <main class="contenedor">
+      <table class="tabla">
+        <thead class="tabla__thead">
+          <tr>
+            <th class="tabla__th">Fecha</th>
+            <th class="tabla__th">Usuario</th>
+            <th class="tabla__th">Detalle</th>
+            <th class="tabla__th">Precio</th>
+            <th class="tabla__th">Acuenta</th>
+            <th class="tabla__th">Saldo</th>
+          </tr>
+        </thead>
+        <tbody class="tabla__tbody" id="tabla_body"></tbody>
+      </table>
+    </main>
+    <script type="module" src="js/script.js"></script>
+  </body>
+</html>

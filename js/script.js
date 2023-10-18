@@ -1,6 +1,7 @@
 import { users, items } from './data.js';
 
 const tablaBody = document.getElementById('tabla_body');
+const body = document.querySelector('body');
 const input = document.getElementById('input');
 const btnUsuarios = document.getElementById('btn-usuarios');
 const modal = document.getElementById('modal');
@@ -91,14 +92,15 @@ btn.addEventListener('click', handleClick);
 
 btnUsuarios.addEventListener('click', () => {
   modal.classList.add('modal--active');
+  body.classList.add('overflow--hidden');
 });
 
 modal.addEventListener('click', (e) => {
   if (e.target.dataset['name']) {
     term = quitarAcentos(e.target.dataset['name']);
-    console.log(term);
     handleClick();
   }
 
   modal.classList.remove('modal--active');
+  body.classList.remove('overflow--hidden');
 });

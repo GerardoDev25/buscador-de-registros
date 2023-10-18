@@ -46,7 +46,6 @@ function quitarAcentos(cadena) {
     ó: 'o',
     ú: 'u',
     ü: 'u',
-    ñ: 'n',
   };
 
   return cadena
@@ -56,7 +55,7 @@ function quitarAcentos(cadena) {
 
 const searchByTerm = () => {
   const userId = users.find((user) =>
-    quitarAcentos(user.nombre).includes(term.toLowerCase())
+    quitarAcentos(user.nombre).includes(quitarAcentos(term))
   )?.id;
 
   if (!userId) {

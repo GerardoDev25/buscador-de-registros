@@ -9,8 +9,69 @@
   </head>
   <body>
     <h1>Buscador de Registros</h1>
-    <div class="modal" id="modal">
-      <ul id="users" class="usuarios"></ul>
+
+    <div class="modal" id="modal-show-users">
+      <div class="show-user-container">
+        <ul id="users" class="usuarios"></ul>
+      </div>
+    </div>
+
+    <div class="modal" id="modal-add-user">
+      <form class="form form-user" id="form-user">
+        <h3 class="form__title">Nuevo Usuario</h3>
+        <div class="form__grup">
+          <label class="form__label" for="name-user">Nombre: </label>
+          <input
+            type="text"
+            name=""
+            id="name-user"
+            class="form__input"
+            required
+          />
+        </div>
+        <input type="submit" value="Crear" class="form__btn" />
+      </form>
+    </div>
+
+    <div class="modal" id="modal-add-item">
+      <form class="form form-user" id="form-item">
+        <h3 class="form__title">Nuevo Registro</h3>
+
+        <div class="form__grup">
+          <label class="form__label" for="precio-item">Precio: </label>
+          <input
+            type="number"
+            id="precio-item"
+            min="1"
+            class="form__input"
+            required
+          />
+        </div>
+        <div class="form__grup">
+          <label class="form__label" for="acuenta-item">Acuenta: </label>
+          <input type="number" id="acuenta-item" min="1" class="form__input" />
+        </div>
+
+        <div class="form__grup">
+          <label class="form__label" for="detalle">Detalle: </label>
+          <textarea
+            name=""
+            id="detalle"
+            class="form__textarea"
+            rows="4"
+            cols="50"
+            required
+          ></textarea>
+        </div>
+
+        <div class="form__grup">
+          <label for="select-user" id="form__label-select"
+            >Seleccionar Usuario:
+          </label>
+          <select id="select-user" required></select>
+        </div>
+        <input type="submit" value="Crear" class="form__btn" />
+      </form>
     </div>
     <div class="buscador contenedor">
       <input
@@ -19,8 +80,10 @@
         placeholder="Ingrese Nombre de Usuario"
         id="input"
       />
-      <button class="buscador__btn" id="btn">Buscar</button>
-      <button class="buscador__btn" id="btn-usuarios">Ver Usuarios</button>
+      <button class="btn" id="btn-search">Buscar</button>
+      <button class="btn" id="btn-usuarios">Ver Usuarios</button>
+      <button class="btn" id="btn-add-user">Nuevo Usuario</button>
+      <button class="btn" id="btn-add-item">Nuevo Registro</button>
     </div>
     <main class="contenedor">
       <table class="tabla">

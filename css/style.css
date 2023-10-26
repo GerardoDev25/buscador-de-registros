@@ -49,6 +49,7 @@ img {
 
 main {
   overflow-x: auto;
+  /* margin-bottom: 10rem; */
 }
 .contenedor {
   max-width: 120rem;
@@ -112,6 +113,23 @@ main {
   border-radius: 0.2rem;
 }
 
+.btn-editar {
+  display: inline-block;
+  background-color: #e082a8;
+  color: black;
+  text-transform: capitalize;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1rem;
+
+  cursor: pointer;
+  transition: background-color, color 0.2s;
+}
+.btn-editar:hover {
+  color: white;
+  background-color: #e74b89;
+}
+
 @media (min-width: 391px) {
   .btn {
     width: 22%;
@@ -143,6 +161,34 @@ main {
   top: 0;
   transform: translateY(-100%);
   transition: transform 0.2s ease-in-out;
+}
+
+.modal__btn {
+  display: inline-block;
+  background-color: #e082a8;
+  color: black;
+  text-transform: capitalize;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  width: 15rem;
+  cursor: pointer;
+  transition: background-color, color 0.2s;
+}
+
+.modal__btn-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+}
+.modal__btn-wrapper .modal__btn {
+  width: 50%;
+}
+
+.modal__btn:hover {
+  color: white;
+  background-color: #e74b89;
 }
 
 .modal--active {

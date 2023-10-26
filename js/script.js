@@ -76,15 +76,9 @@ const loadDatatoLocalStorage = () => {
   }
 };
 
-// todo aqui me quede
-const updateUser = () => {
-  const user = users.find((user) => quitarAcentos(user.nombre) === term);
-  console.log({term});
-  formEditNameUser.innerHTML = user.nombre;
-  modalEditUser.classList.add('modal--active');
-  body.classList.add('overflow--hidden');
-  console.log(formEditNameUser);
-  term = '';
+const obtenerCoordenadaY = () => {
+  const coordenadaY = window.scrollY || window.pageYOffset;
+  return coordenadaY + 'px';
 };
 
 const loadUsers = () => {
@@ -154,6 +148,7 @@ const searchByTerm = () => {
 };
 
 const handleClick = () => {
+  console.log(term);
   if (!term) {
     return;
   }
@@ -183,12 +178,12 @@ input.addEventListener('keyup', (e) => {
 btnSearch.addEventListener('click', handleClick);
 
 btnNewUser.addEventListener('click', () => {
-  modalAddUser.classList.add('modal--active');
+  modalAddUser.style.transform = `translateY(${obtenerCoordenadaY()})`;
   body.classList.add('overflow--hidden');
 });
 
 btnNewItem.addEventListener('click', () => {
-  modalAddItem.classList.add('modal--active');
+  modalAddItem.style.transform = `translateY(${obtenerCoordenadaY()})`;
   body.classList.add('overflow--hidden');
 });
 
@@ -206,44 +201,57 @@ tablaBody.addEventListener('click', (e) => {
   formEditAcuentaItem.value = itemSelected.precio - itemSelected.saldo;
   formEditDetalleItem.textContent = itemSelected.detalle;
 
-  modalEditItem.classList.add('modal--active');
+  modalEditItem.style.transform = `translateY(${obtenerCoordenadaY()})`;
   body.classList.add('overflow--hidden');
 });
 
 btnShowUsuarios.addEventListener('click', () => {
-  modalShowUsers.classList.add('modal--active');
+  modalShowUsers.style.transform = `translateY(${obtenerCoordenadaY()})`;
   body.classList.add('overflow--hidden');
 });
 
 modalAddUser.addEventListener('click', (e) => {
   if (e.target.classList.contains('modal')) {
-    modalAddUser.classList.remove('modal--active');
+    modalAddUser.style.transform = ``;
+
     body.classList.remove('overflow--hidden');
   }
 });
 
 modalAddItem.addEventListener('click', (e) => {
   if (e.target.classList.contains('modal')) {
-    modalAddItem.classList.remove('modal--active');
+    modalAddItem.style.transform = ``;
     body.classList.remove('overflow--hidden');
   }
 });
 
+modalEditUser.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('modal')) return;
+
+  modalEditUser.style.transform = ``;
+  body.classList.remove('overflow--hidden');
+});
 modalShowUsers.addEventListener('click', (e) => {
   if (e.target.classList.contains('usuario')) {
     term = quitarAcentos(e.target.dataset['name']);
     handleClick();
-  }
-  else if (e.target.dataset['search']) {
+  } else if (e.target.dataset['search']) {
     term = quitarAcentos(e.target.parentElement.dataset['name']);
     handleClick();
-  }
-  else if (e.target.dataset['edit']) {
+  } else if (e.target.dataset['edit']) {
     term = quitarAcentos(e.target.parentElement.dataset['name']);
-    updateUser();
+    // updateUser();
+
+    const user = users.find((user) => quitarAcentos(user.nombre) === term);
+
+    formEditNameUser.value = user.nombre;
+    formEditNameUser.dataset.id = user.id;
+    modalEditUser.style.transform = `translateY(${obtenerCoordenadaY()})`;
+    body.classList.add('overflow--hidden');
+    term = '';
   }
 
-  modalShowUsers.classList.remove('modal--active');
+  modalShowUsers.style.transform = ``;
   body.classList.remove('overflow--hidden');
 });
 
@@ -252,7 +260,7 @@ modalEditItem.addEventListener('click', (e) => {
     e.target.classList.contains('modal') ||
     e.target.classList.contains('btn-edit-cancel')
   ) {
-    modalEditItem.classList.remove('modal--active');
+    modalEditItem.style.transform = ``;
     body.classList.remove('overflow--hidden');
 
     formEditprecioItem.value = '';
@@ -287,8 +295,34 @@ formAddItem.addEventListener('submit', (e) => {
   formprecioItem.value = '';
   formacuentaItem.value = '';
   formDetalleItem.value = '';
-  modalAddItem.classList.remove('modal--active');
+  modalAddItem.style.transform = ``;
   body.classList.remove('overflow--hidden');
+});
+
+formEditUser.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const id = Number(formEditNameUser.dataset.id);
+  const name = formEditNameUser.value;
+  const userUpdated = { id, nombre: name };
+
+  users = users.map((user) => {
+    if (user.id === id) return { ...user, ...userUpdated };
+    return user;
+  });
+
+  localStorage.setItem('users', JSON.stringify(users));
+
+  term = quitarAcentos(name);
+  loadUsers();
+  loadUserSelected();
+  handleClick();
+  formEditNameUser.value = '';
+  modalEditUser.style.transform = ``;
+  body.classList.remove('overflow--hidden');
+  setTimeout(() => {
+    alert('Usuario Modificado Exitosamente');
+  }, 300);
 });
 
 formEditItem.addEventListener('submit', (e) => {
@@ -300,8 +334,6 @@ formEditItem.addEventListener('submit', (e) => {
   const itemId = Number(formEditItem.dataset.itemId);
   const idu = Number(formEditSelectUserItem.value);
   term = quitarAcentos(users.find((user) => user.id === idu).nombre);
-
-  const itemsSelected = items.filter((item) => item.idu === idu);
 
   const itemUpdated = {
     idu,
@@ -319,9 +351,11 @@ formEditItem.addEventListener('submit', (e) => {
 
   localStorage.setItem('items', JSON.stringify(items));
   handleClick();
-
-  modalEditItem.classList.remove('modal--active');
+  modalEditItem.style.transform = ``;
   body.classList.remove('overflow--hidden');
+  setTimeout(() => {
+    alert('Registro Modificado Exitosamente');
+  }, 300);
 });
 
 formAddUser.addEventListener('submit', (e) => {
@@ -335,6 +369,6 @@ formAddUser.addEventListener('submit', (e) => {
   loadUsers();
   loadUserSelected();
   formNameUser.value = '';
-  modalAddUser.classList.remove('modal--active');
+  modalAddUser.style.transform = ``;
   body.classList.remove('overflow--hidden');
 });

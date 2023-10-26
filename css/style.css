@@ -200,7 +200,6 @@ main {
   width: 90%;
 }
 .usuarios > div {
-
   padding-top: 2rem;
   padding-bottom: 2rem;
   height: 90%;
@@ -225,6 +224,26 @@ main {
   cursor: pointer;
   border-radius: 0.5rem;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.usuario p {
+  margin: 0;
+}
+
+.usuario button {
+  background-color: inherit;
+  padding: 1rem;
+  display: inline-block;
+  border: none;
+  color: inherit;
+}
+.usuario button:hover {
+  color: black;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .usuario:hover {

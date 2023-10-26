@@ -8,7 +8,7 @@
     <title>Projecto U</title>
   </head>
   <body>
-    <h1>Buscador de Registros</h1>
+    <h1>Auxiliar de cuentas por cobrar</h1>
 
     <div class="modal" id="modal-show-users">
       <div class="show-user-container">
@@ -30,6 +30,23 @@
           />
         </div>
         <input type="submit" value="Crear" class="form__btn" />
+      </form>
+    </div>
+
+    <div class="modal" id="modal-edit-user">
+      <form class="form form-user" id="form-user-edit">
+        <h3 class="form__title">Editar Usuario</h3>
+        <div class="form__grup">
+          <label class="form__label" for="name-user-edit">Nombre: </label>
+          <input
+            type="text"
+            name=""
+            id="name-user-edit"
+            class="form__input"
+            required
+          />
+        </div>
+        <input type="submit" value="Actualizar" class="form__btn" />
       </form>
     </div>
 
@@ -73,6 +90,50 @@
         <input type="submit" value="Crear" class="form__btn" />
       </form>
     </div>
+
+    <div class="modal" id="modal-edit-item">
+      <form class="form form-user" id="form-item-edit">
+        <h3 class="form__title">Editar Registro</h3>
+
+        <div class="form__grup">
+          <label class="form__label" for="precio-item-edit">Precio: </label>
+          <input
+            type="number"
+            id="precio-item-edit"
+            min="1"
+            class="form__input"
+            required
+          />
+        </div>
+        <div class="form__grup">
+          <label class="form__label" for="acuenta-item-edit">Acuenta: </label>
+          <input type="number" id="acuenta-item-edit" min="1" class="form__input" />
+        </div>
+
+        <div class="form__grup">
+          <label class="form__label" for="detalle-edit">Detalle: </label>
+          <textarea
+            name=""
+            id="detalle-edit"
+            class="form__textarea"
+            rows="4"
+            cols="50"
+            required
+          ></textarea>
+        </div>
+
+        <div class="form__grup">
+          <label for="select-user-edit" id="form__label-select"
+            >Seleccionar Usuario:
+          </label>
+          <select id="select-user-edit" required></select>
+        </div>
+        <input type="submit" value="Actualizar" class="form__btn" />
+        <input type="button" value="Cancelar" class="form__btn btn-edit-cancel" />
+      </form>
+    </div>
+
+
     <div class="buscador contenedor">
       <input
         type="text"
@@ -95,6 +156,7 @@
             <th class="tabla__th">Precio</th>
             <th class="tabla__th">Acuenta</th>
             <th class="tabla__th">Saldo</th>
+            <th class="tabla__th">Editar</th>
           </tr>
         </thead>
         <tbody class="tabla__tbody" id="tabla_body"></tbody>
